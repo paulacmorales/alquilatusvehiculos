@@ -8,26 +8,17 @@ public class Vehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long idVehiculo;
     private String marca;
     private String modelo;
     private int anio;
-    private double precioAlquiler;
-
-    // Constructores
-    public Vehiculo() {}
-
-    public Vehiculo(String marca, String modelo, int anio, double precioAlquiler) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.anio = anio;
-        this.precioAlquiler = precioAlquiler;
-    }
+    private String matricula;
+    private String tipo;
+    private double precioDia;
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getIdVehiculo() { return idVehiculo; }
+    public void setIdVehiculo(Long idVehiculo) { this.idVehiculo = idVehiculo; }
 
     public String getMarca() { return marca; }
     public void setMarca(String marca) { this.marca = marca; }
@@ -38,7 +29,12 @@ public class Vehiculo {
     public int getAnio() { return anio; }
     public void setAnio(int anio) { this.anio = anio; }
 
-    public double getPrecioAlquiler() { return precioAlquiler; }
-    public void setPrecioAlquiler(double precioAlquiler) { this.precioAlquiler = precioAlquiler; }
-}
+    public String getMatricula() { return matricula; }
+    public void setMatricula(String matricula) { this.matricula = matricula; }
 
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public double getPrecioDia() { return precioDia; }
+    public void setPrecioDia(double precioDia) { this.precioDia = precioDia; }
+}
