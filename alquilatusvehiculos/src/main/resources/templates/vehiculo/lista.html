@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title>Lista de Vehículos</title>
+</head>
+<body>
+    <h1>Vehículos Disponibles</h1>
+    <div th:each="vehiculo : ${vehiculos}">
+        <img th:src="@{${vehiculo.imagen}}" alt="Vehiculo"/>
+        <h2 th:text="${vehiculo.marca}"></h2>
+        <p th:text="${vehiculo.modelo}"></p>
+        <a th:href="@{/vehiculos/{id}/alquilar(id=${vehiculo.idVehiculo})}">Alquilar</a>
+    </div>
+</body>
+</html>

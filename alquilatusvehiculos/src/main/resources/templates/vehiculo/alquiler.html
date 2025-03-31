@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title>Formulario de Alquiler</title>
+</head>
+<body>
+    <h1>Alquilar Vehículo</h1>
+    <form th:action="@{/vehiculos/{id}/alquilar(id=${vehiculo.idVehiculo})}" method="post">
+        <!-- Campos del formulario para el alquiler -->
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" required/>
+        <label for="fechaFin">Fecha de Fin</label>
+        <input type="date" id="fechaFin" name="fechaFin" required/>
+        <button type="submit">Reservar</button>
+    </form>
+</body>
+</html>
