@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Alquiler</title>
+</head>
+<body>
+    <h1>Detalles del Alquiler</h1>
+    <p>Cliente: <span th:text="${alquiler.cliente.nombre}"></span></p>
+    <p>Vehículo: <span th:text="${alquiler.vehiculo.modelo}"></span></p>
+    <p>Fecha de Inicio: <span th:text="${alquiler.fechaInicio}"></span></p>
+    <p>Fecha de Fin: <span th:text="${alquiler.fechaFin}"></span></p>
+
+    <a th:href="@{/alquileres/{id}/editar(id=${alquiler.id})}">Editar</a>
+    <a th:href="@{/alquileres/{id}/eliminar(id=${alquiler.id})}">Eliminar</a>
+</body>
+</html>
