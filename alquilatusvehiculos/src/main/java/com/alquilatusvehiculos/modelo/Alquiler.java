@@ -14,12 +14,13 @@ public class Alquiler {
     private Date fechaFin;
     private double precioTotal;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
-    private Cliente cliente;
+   @ManyToOne
+   @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente") 
+   private Cliente cliente;
+
 
     @ManyToOne
-    @JoinColumn(name = "vehiculo_id", referencedColumnName = "id_vehiculo")
+    @JoinColumn(name = "id_vehiculo", referencedColumnName = "id_vehiculo")
     private Vehiculo vehiculo;
 
     // Getters y Setters

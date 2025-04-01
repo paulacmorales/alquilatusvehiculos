@@ -8,13 +8,15 @@ public class Vehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_vehiculo")
     private Long idVehiculo;
+
     private String marca;
     private String modelo;
-    private int anio;
+    private Integer anio;
     private String matricula;
     private String tipo;
-    private double precioDia;
+    private Double precioDia;
 
     // Getters y Setters
     public Long getIdVehiculo() { return idVehiculo; }
