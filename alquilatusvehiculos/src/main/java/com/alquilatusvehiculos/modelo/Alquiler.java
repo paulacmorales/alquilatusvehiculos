@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "alquiler")
+@Table(name = "alquileres")
 public class Alquiler {
 
     @Id
@@ -15,11 +15,11 @@ public class Alquiler {
     private double precioTotal;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "idCliente")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id_cliente")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "vehiculo_id", referencedColumnName = "idVehiculo")
+    @JoinColumn(name = "vehiculo_id", referencedColumnName = "id_vehiculo")
     private Vehiculo vehiculo;
 
     // Getters y Setters

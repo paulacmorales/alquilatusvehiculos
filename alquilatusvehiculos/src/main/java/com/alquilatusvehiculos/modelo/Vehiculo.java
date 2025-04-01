@@ -3,7 +3,7 @@ package com.alquilatusvehiculos.modelo;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "vehiculo")
+@Table(name = "vehiculos")
 public class Vehiculo {
 
     @Id
