@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Alquiler</title>
+</head>
+<body>
+    <h1>Crear Alquiler</h1>
+    <form th:action="@{/alquileres/nuevo}" th:object="${alquiler}" method="post">
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" th:field="*{fechaInicio}" required/>
+        
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="date" id="fechaFin" th:field="*{fechaFin}" required/>
+        
+        <label for="vehiculo">Vehículo:</label>
+        <select id="vehiculo" th:field="*{vehiculo.id}">
+            <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.id}" th:text="${vehiculo.modelo}"></option>
+        </select>
+
+        <button type="submit">Crear Alquiler</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alquileres</title>
+</head>
+<body>
+    <h1>Lista de Alquileres</h1>
+    <div th:each="alquiler : ${alquileres}">
+        <p th:text="'Cliente: ' + ${alquiler.cliente.nombre}"></p>
+        <p th:text="'Vehículo: ' + ${alquiler.vehiculo.modelo}"></p>
+        <p th:text="'Fecha de Inicio: ' + ${alquiler.fechaInicio}"></p>
+        <p th:text="'Fecha de Fin: ' + ${alquiler.fechaFin}"></p>
+    </div>
+</body>
+</html>

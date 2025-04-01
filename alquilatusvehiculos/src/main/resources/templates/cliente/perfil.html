@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil del Cliente</title>
+</head>
+<body>
+    <h1>Perfil de Cliente</h1>
+    <p>Nombre: <span th:text="${cliente.nombre}"></span></p>
+    <p>Apellido: <span th:text="${cliente.apellido}"></span></p>
+    <p>Email: <span th:text="${cliente.email}"></span></p>
+    <p>Teléfono: <span th:text="${cliente.telefono}"></span></p>
+
+    <a th:href="@{/clientes/{id}/editar(id=${cliente.id})}">Editar</a>
+</body>
+</html>
