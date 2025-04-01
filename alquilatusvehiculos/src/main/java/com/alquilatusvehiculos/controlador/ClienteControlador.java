@@ -14,6 +14,9 @@ public class ClienteControlador {
     @Autowired
     private ClienteRepositorio clienteRepositorio;
 
+    private static final String CLIENTE_ATTRIBUTE = "cliente";
+    private static final String REDIRECT_CLIENTES = "redirect:/clientes";
+
     // Mostrar todos los clientes (Read)
     @GetMapping
     public String listarClientes(Model model) {
@@ -24,27 +27,27 @@ public class ClienteControlador {
     // Crear un nuevo cliente (Create)
     @GetMapping("/nuevo")
     public String mostrarFormularioCrearCliente(Model model) {
-        model.addAttribute("cliente", new Cliente());
+        model.addAttribute(CLIENTE_ATTRIBUTE, new Cliente());
         return "clientes/crear";
     }
 
     @PostMapping("/nuevo")
     public String crearCliente(@ModelAttribute Cliente cliente) {
         clienteRepositorio.save(cliente);
-        return "redirect:/clientes";
+        return REDIRECT_CLIENTES;
     }
 
     // Mostrar un cliente (Read)
     @GetMapping("/{id}")
     public String mostrarCliente(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("cliente", clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
+        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
         return "clientes/perfil";
     }
 
     // Editar un cliente (Update)
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEditarCliente(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("cliente", clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
+        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
         return "clientes/editar";
     }
 
@@ -52,7 +55,7 @@ public class ClienteControlador {
     public String editarCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
         cliente.setId(id);
         clienteRepositorio.save(cliente);
-        return "redirect:/clientes";
+        return REDIRECT_CLIENTES;
     }
 
     // Eliminar un cliente (Delete)
@@ -60,6 +63,6 @@ public class ClienteControlador {
     public String eliminarCliente(@PathVariable("id") Long id) {
         Cliente cliente = clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
         clienteRepositorio.delete(cliente);
-        return "redirect:/clientes";
+        return REDIRECT_CLIENTES;
     }
 }

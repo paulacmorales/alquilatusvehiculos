@@ -14,6 +14,9 @@ public class VehiculoControlador {
     @Autowired
     private VehiculoRepositorio vehiculoRepositorio;
 
+    private static final String VEHICULO_ATTRIBUTE = "vehiculo";
+    private static final String REDIRECT_VEHICULOS = "redirect:/vehiculos";
+
     // Listar todos los vehículos (Read)
     @GetMapping
     public String listarVehiculos(Model model) {
@@ -24,27 +27,27 @@ public class VehiculoControlador {
     // Crear un nuevo vehículo (Create)
     @GetMapping("/nuevo")
     public String mostrarFormularioCrearVehiculo(Model model) {
-        model.addAttribute("vehiculo", new Vehiculo());
+        model.addAttribute(VEHICULO_ATTRIBUTE, new Vehiculo());
         return "vehiculos/crear";
     }
 
     @PostMapping("/nuevo")
     public String crearVehiculo(@ModelAttribute Vehiculo vehiculo) {
         vehiculoRepositorio.save(vehiculo);
-        return "redirect:/vehiculos";
+        return REDIRECT_VEHICULOS;
     }
 
     // Mostrar un vehículo (Read)
     @GetMapping("/{id}")
     public String mostrarVehiculo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("vehiculo", vehiculoRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado")));
+        model.addAttribute(VEHICULO_ATTRIBUTE, vehiculoRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado")));
         return "vehiculos/perfil";
     }
 
     // Editar un vehículo (Update)
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEditarVehiculo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("vehiculo", vehiculoRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado")));
+        model.addAttribute(VEHICULO_ATTRIBUTE, vehiculoRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado")));
         return "vehiculos/editar";
     }
 
@@ -52,7 +55,7 @@ public class VehiculoControlador {
     public String editarVehiculo(@PathVariable("id") Long id, @ModelAttribute Vehiculo vehiculo) {
         vehiculo.setId(id);
         vehiculoRepositorio.save(vehiculo);
-        return "redirect:/vehiculos";
+        return REDIRECT_VEHICULOS;
     }
 
     // Eliminar un vehículo (Delete)
@@ -60,6 +63,6 @@ public class VehiculoControlador {
     public String eliminarVehiculo(@PathVariable("id") Long id) {
         Vehiculo vehiculo = vehiculoRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado"));
         vehiculoRepositorio.delete(vehiculo);
-        return "redirect:/vehiculos";
+        return REDIRECT_VEHICULOS;
     }
 }
