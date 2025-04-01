@@ -16,6 +16,7 @@ public class ClienteControlador {
 
     private static final String CLIENTE_ATTRIBUTE = "cliente";
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
+    private static final String CLIENTE_NO_ENCONTRADO = "Cliente no encontrado";
 
     // Mostrar todos los clientes (Read)
     @GetMapping
@@ -40,14 +41,14 @@ public class ClienteControlador {
     // Mostrar un cliente (Read)
     @GetMapping("/{id}")
     public String mostrarCliente(@PathVariable("id") Long id, Model model) {
-        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
+        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException(CLIENTE_NO_ENCONTRADO)));
         return "clientes/perfil";
     }
 
     // Editar un cliente (Update)
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEditarCliente(@PathVariable("id") Long id, Model model) {
-        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado")));
+        model.addAttribute(CLIENTE_ATTRIBUTE, clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException(CLIENTE_NO_ENCONTRADO)));
         return "clientes/editar";
     }
 
@@ -61,7 +62,7 @@ public class ClienteControlador {
     // Eliminar un cliente (Delete)
     @GetMapping("/{id}/eliminar")
     public String eliminarCliente(@PathVariable("id") Long id) {
-        Cliente cliente = clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
+        Cliente cliente = clienteRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException(CLIENTE_NO_ENCONTRADO));
         clienteRepositorio.delete(cliente);
         return REDIRECT_CLIENTES;
     }
