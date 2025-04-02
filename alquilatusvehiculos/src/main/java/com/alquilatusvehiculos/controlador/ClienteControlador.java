@@ -54,7 +54,7 @@ public class ClienteControlador {
 
     @PostMapping("/{id}/editar")
     public String editarCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
-        cliente.setId(id);
+        cliente.setIdCliente(id);
         clienteRepositorio.save(cliente);
         return REDIRECT_CLIENTES;
     }

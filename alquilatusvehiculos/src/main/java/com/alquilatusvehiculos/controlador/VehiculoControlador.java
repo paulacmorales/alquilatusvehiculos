@@ -53,7 +53,7 @@ public class VehiculoControlador {
 
     @PostMapping("/{id}/editar")
     public String editarVehiculo(@PathVariable("id") Long id, @ModelAttribute Vehiculo vehiculo) {
-        vehiculo.setId(id);
+        vehiculo.setIdVehiculo(id);
         vehiculoRepositorio.save(vehiculo);
         return REDIRECT_VEHICULOS;
     }

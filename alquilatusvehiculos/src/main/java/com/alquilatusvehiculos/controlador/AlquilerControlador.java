@@ -56,7 +56,7 @@ public class AlquilerControlador {
 
     @PostMapping("/{id}/editar")
     public String editarAlquiler(@PathVariable("id") Long id, @ModelAttribute Alquiler alquiler) {
-        alquiler.setId(id);
+        alquiler.setIdAlquiler(id);
         alquilerRepositorio.save(alquiler);
         return REDIRECT_ALQUILERES;
     }
