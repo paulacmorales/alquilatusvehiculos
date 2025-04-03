@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Alquileres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-bar {
+            background-color: #007bff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn i {
+            font-size: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="/index.html" class="home-btn"><i class="fas fa-home"></i> Inicio</a>
+</div>
+
+<div class="container">
+    <h1>Lista de Alquileres</h1>
+    <a href="/alquileres/nuevo" class="btn">Añadir Alquiler</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vehículo</th>
+            <th>Cliente</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Fin</th>
+            <th>Precio Total</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="alquiler : ${alquileres}">
+            <td th:text="${alquiler.id}"></td>
+            <td th:text="${alquiler.vehiculo.marca} + ' ' + ${alquiler.vehiculo.modelo}"></td>
+            <td th:text="${alquiler.cliente.nombre}"></td>
+            <td th:text="${alquiler.fechaInicio}"></td>
+            <td th:text="${alquiler.fechaFin}"></td>
+            <td th:text="${alquiler.precioTotal}"></td>
+            <td>
+                <a th:href="@{/alquileres/editar/{id}(id=${alquiler.id})}" class="btn">Editar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
