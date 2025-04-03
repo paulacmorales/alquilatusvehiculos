@@ -104,6 +104,7 @@
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
+            <th>Direccion</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -113,6 +114,7 @@
             <td th:text="${cliente.nombre}"></td>
             <td th:text="${cliente.email}"></td>
             <td th:text="${cliente.telefono}"></td>
+            <td th:text="${cliente.direccion}"></td>
             <td>
                 <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn">Editar</a>
             </td>

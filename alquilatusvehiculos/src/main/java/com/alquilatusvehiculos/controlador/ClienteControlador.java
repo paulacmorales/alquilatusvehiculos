@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Controller
 @RequestMapping("/clientes")
 public class ClienteControlador {
@@ -21,8 +20,14 @@ public class ClienteControlador {
     public String getAllClientes(Model model) {
         List<Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("clientes", clientes);
-        model.addAttribute("cliente", new Cliente()); // Para el formulario de creación
         return "clientes";  // Nombre de la vista Thymeleaf
+    }
+
+    // Mostrar formulario para crear un nuevo cliente
+    @GetMapping("/nuevo")
+    public String nuevoCliente(Model model) {
+        model.addAttribute("cliente", new Cliente()); // Crear un nuevo objeto Cliente vacío
+        return "formulario_clientes";  // Vista donde se encuentra el formulario de cliente
     }
 
     // Crear un nuevo cliente

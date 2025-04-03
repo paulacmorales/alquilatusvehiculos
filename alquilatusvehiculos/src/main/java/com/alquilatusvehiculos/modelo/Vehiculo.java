@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "vehiculos")
 public class Vehiculo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +21,10 @@ public class Vehiculo {
     private int anio;
     private boolean disponible;
 
-    public void setId(Long id) {
-        this.id = id;
+    // Getter para precioPorDia
+    public Double getPrecioPorDia() {
+        return precioPorDia;
     }
+
+    // Otros métodos y setters generados por Lombok (si estás usando Lombok)
 }

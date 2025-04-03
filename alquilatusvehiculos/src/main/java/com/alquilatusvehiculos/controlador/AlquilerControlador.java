@@ -87,10 +87,18 @@ public class AlquilerControlador {
         return "redirect:/alquileres";  // Redirige a la lista de alquileres
     }
 
-    // Método para calcular el precio total del alquiler
+    // Método para calcular el precio total del alquiler con validaciones
     private double calcularPrecioTotal(LocalDate fechaInicio, LocalDate fechaFin, Vehiculo vehiculo) {
-        // Lógica para calcular el precio total basado en las fechas y el precio diario del vehículo
+        if (fechaInicio == null || fechaFin == null || fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("Las fechas son inválidas. La fecha de inicio no puede ser posterior a la fecha de fin.");
+        }
+
         long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
-        return dias * vehiculo.getPrecioPorDia();  // Suponiendo que tienes un método getPrecioPorDia en Vehiculo
+        if (dias <= 0) {
+            throw new IllegalArgumentException("El alquiler debe durar al menos un día.");
+        }
+
+        return dias * vehiculo.getPrecioPorDia();
     }
+
 }
