@@ -63,10 +63,12 @@
         th {
             background-color: #007bff;
             color: white;
+            text-align: center;
         }
 
         td {
             background-color: #f9f9f9;
+            text-align: center;
         }
 
         tr:hover {
@@ -74,19 +76,58 @@
         }
 
         .btn {
-            padding: 8px 15px;
-            background-color: #007bff;
+            padding: 10px 0;
             color: white;
             border: none;
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100px;
+            text-align: center;
         }
 
-        .btn:hover {
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-edit:hover {
             background-color: #0056b3;
         }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .btn-add {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: #28a745;
+        }
+
+        .btn-add:hover {
+            background-color: #218838;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
     </style>
+    <script>
+        function confirmarEliminacion(clienteId) {
+            if (confirm("¿Estás seguro de que quieres eliminar este cliente?")) {
+                window.location.href = "/clientes/eliminar/" + clienteId;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -96,7 +137,7 @@
 
 <div class="container">
     <h1>Lista de Clientes</h1>
-    <a href="/clientes/nuevo" class="btn">Añadir Cliente</a>
+    <a href="/clientes/nuevo" class="btn btn-add">Añadir Cliente</a>
     <table>
         <thead>
         <tr>
@@ -104,8 +145,8 @@
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
-            <th>Direccion</th>
-            <th>Acciones</th>
+            <th>Dirección</th>
+            <th style="text-align: center;">Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -116,7 +157,10 @@
             <td th:text="${cliente.telefono}"></td>
             <td th:text="${cliente.direccion}"></td>
             <td>
-                <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn">Editar</a>
+                <div class="btn-container">
+                    <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-edit">Editar</a>
+                    <button type="button" class="btn btn-delete" th:attr="onclick=|confirmarEliminacion(${cliente.id})|">Eliminar</button>
+                </div>
             </td>
         </tr>
         </tbody>
