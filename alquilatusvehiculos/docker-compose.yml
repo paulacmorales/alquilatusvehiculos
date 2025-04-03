@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: alquila_db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: alquiler_vehiculos
+    ports:
+      - "3307:3306" #mi puerto 3306 está en uso he usado otro, poner 3306 en ambos casos para ponerlo por defecto
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: alquila_app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/alquiler_vehiculos?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+volumes:
+  db_data:
