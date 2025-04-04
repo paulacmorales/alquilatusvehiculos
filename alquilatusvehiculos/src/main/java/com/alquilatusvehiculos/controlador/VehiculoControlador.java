@@ -44,10 +44,23 @@ public class VehiculoControlador {
 
     @PostMapping("/actualizar/{id}")
     public String actualizarVehiculo(@PathVariable Long id, @ModelAttribute Vehiculo vehiculo) {
-        vehiculo.setId(id);
-        vehiculoRepository.save(vehiculo);
+        // Obtener el vehículo de la base de datos para asegurarnos de que estamos actualizando el correcto
+        Vehiculo vehiculoExistente = vehiculoRepository.findById(id).orElse(null);
+        if (vehiculoExistente != null) {
+            // Aquí actualizamos solo los campos que deben cambiar
+            vehiculoExistente.setMarca(vehiculo.getMarca());
+            vehiculoExistente.setModelo(vehiculo.getModelo());
+            vehiculoExistente.setMatricula(vehiculo.getMatricula());
+            vehiculoExistente.setPrecioPorDia(vehiculo.getPrecioPorDia());
+            vehiculoExistente.setAnio(vehiculo.getAnio());
+            vehiculoExistente.setDisponible(vehiculo.isDisponible());
+
+            // Guardar el vehículo actualizado
+            vehiculoRepository.save(vehiculoExistente);
+        }
         return "redirect:/vehiculos";
     }
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarVehiculo(@PathVariable Long id) {

@@ -37,6 +37,17 @@ public class AlquilerControlador {
         return "alquileres";  // Nombre del archivo HTML
     }
 
+    // Eliminar un alquiler por ID
+    @GetMapping("/alquileres/eliminar/{id}")
+    public String eliminarAlquiler(@PathVariable("id") Long id) {
+        // Verificar si el alquiler existe
+        Alquiler alquiler = alquilerRepositorio.findById(id).orElse(null);
+        if (alquiler != null) {
+            alquilerRepositorio.delete(alquiler);  // Eliminar el alquiler
+        }
+        return "redirect:/alquileres";  // Redirige a la lista de alquileres después de eliminar
+    }
+
     // Formulario para añadir un nuevo alquiler
     @GetMapping("/alquileres/nuevo")
     public String mostrarFormularioNuevoAlquiler(Model model) {
@@ -60,7 +71,7 @@ public class AlquilerControlador {
         return "redirect:/alquileres";  // Redirige a la lista de alquileres
     }
 
-    // Editar un alquiler existente
+    // Formulario para editar un alquiler
     @GetMapping("/alquileres/editar/{id}")
     public String mostrarFormularioEditarAlquiler(@PathVariable("id") Long id, Model model) {
         Alquiler alquiler = alquilerRepositorio.findById(id).orElse(null);
@@ -70,21 +81,31 @@ public class AlquilerControlador {
             model.addAttribute("alquiler", alquiler);
             model.addAttribute("clientes", clientes);
             model.addAttribute("vehiculos", vehiculos);
-            return "formulario_alquiler";  // Nombre del archivo HTML para el formulario
+            return "editar_alquiler";  // Nombre del archivo HTML para el formulario de edición
         }
-        return "redirect:/alquileres";
+        return "redirect:/alquileres";  // Si no se encuentra el alquiler, redirige a la lista de alquileres
     }
 
     // Actualizar un alquiler existente
-    @PostMapping("/alquileres/editar")
-    public String actualizarAlquiler(Alquiler alquiler) {
-        // Calcular el total del alquiler
-        double precioTotal = calcularPrecioTotal(alquiler.getFechaInicio(), alquiler.getFechaFin(), alquiler.getVehiculo());
-        alquiler.setPrecioTotal(precioTotal);
+    @PostMapping("/alquileres/editar/{id}")
+    public String actualizarAlquiler(@PathVariable("id") Long id, Alquiler alquiler) {
+        // Verificar si el alquiler existe
+        Alquiler alquilerExistente = alquilerRepositorio.findById(id).orElse(null);
+        if (alquilerExistente != null) {
+            // Actualizar los campos del alquiler existente con los nuevos valores
+            alquilerExistente.setCliente(alquiler.getCliente());
+            alquilerExistente.setVehiculo(alquiler.getVehiculo());
+            alquilerExistente.setFechaInicio(alquiler.getFechaInicio());
+            alquilerExistente.setFechaFin(alquiler.getFechaFin());
 
-        // Actualizar el alquiler con el total recalculado
-        alquilerRepositorio.save(alquiler);
-        return "redirect:/alquileres";  // Redirige a la lista de alquileres
+            // Calcular el total del alquiler
+            double precioTotal = calcularPrecioTotal(alquiler.getFechaInicio(), alquiler.getFechaFin(), alquiler.getVehiculo());
+            alquilerExistente.setPrecioTotal(precioTotal);
+
+            // Guardar los cambios en el alquiler
+            alquilerRepositorio.save(alquilerExistente);
+        }
+        return "redirect:/alquileres";  // Redirige a la lista de alquileres después de guardar
     }
 
     // Método para calcular el precio total del alquiler con validaciones
@@ -100,5 +121,6 @@ public class AlquilerControlador {
 
         return dias * vehiculo.getPrecioPorDia();
     }
+
 
 }

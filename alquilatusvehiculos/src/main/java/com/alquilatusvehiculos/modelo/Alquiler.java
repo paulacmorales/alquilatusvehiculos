@@ -1,14 +1,9 @@
 package com.alquilatusvehiculos.modelo;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "alquileres")
 public class Alquiler {
 
@@ -28,25 +23,16 @@ public class Alquiler {
     private LocalDate fechaFin;    // Fecha de fin del alquiler
     private Double precioTotal;    // Precio total del alquiler
 
-    // Getters y Setters generados por Lombok, por lo que no es necesario repetirlos manualmente
-    // Aquí simplemente los dejamos para que estén claros los métodos y propiedades
-
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
+    // Getter y Setter para id
+    public Long getId() {
+        return id;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
+    // Getter y Setter para vehiculo
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
@@ -55,6 +41,34 @@ public class Alquiler {
         this.vehiculo = vehiculo;
     }
 
+    // Getter y Setter para cliente
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    // Getter y Setter para fechaInicio
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    // Getter y Setter para fechaFin
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    // Getter y Setter para precioTotal
     public Double getPrecioTotal() {
         return precioTotal;
     }

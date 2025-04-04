@@ -63,6 +63,7 @@
         th {
             background-color: #007bff;
             color: white;
+            text-align: center;
         }
 
         td {
@@ -86,7 +87,28 @@
         .btn:hover {
             background-color: #0056b3;
         }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
     </style>
+    <script>
+        function confirmarEliminacion(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar este alquiler?")) {
+                window.location.href = "/alquileres/eliminar/" + id;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -118,7 +140,10 @@
             <td th:text="${alquiler.fechaFin}"></td>
             <td th:text="${alquiler.precioTotal}"></td>
             <td>
-                <a th:href="@{/alquileres/editar/{id}(id=${alquiler.id})}" class="btn">Editar</a>
+                <div class="btn-container">
+                    <a th:href="@{/alquileres/editar/{id}(id=${alquiler.id})}" class="btn">Editar</a>
+                    <button type="button" class="btn btn-delete" th:attr="onclick=|confirmarEliminacion(${alquiler.id})|">Eliminar</button>
+                </div>
             </td>
         </tr>
         </tbody>
