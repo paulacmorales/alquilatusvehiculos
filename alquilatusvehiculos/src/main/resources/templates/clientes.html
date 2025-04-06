@@ -2,109 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Lista de Clientes</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Font Awesome (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .top-bar {
-            background-color: #007bff;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .home-btn {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .home-btn i {
-            font-size: 20px;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        td {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .btn {
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<div class="top-bar">
-    <a href="/index.html" class="home-btn"><i class="fas fa-home"></i> Inicio</a>
-</div>
+<!-- Barra superior -->
+<nav class="navbar navbar-dark bg-primary px-3">
+    <a class="navbar-brand d-flex align-items-center" href="/index.html">
+        <i class="fas fa-home me-2"></i> Inicio
+    </a>
+</nav>
 
-<div class="container">
-    <h1>Lista de Clientes</h1>
-    <a href="/clientes/nuevo" class="btn">Añadir Cliente</a>
-    <table>
-        <thead>
+<!-- Contenedor principal -->
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Lista de Clientes</h1>
+        <a href="/clientes/nuevo" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus"></i> Añadir Cliente
+        </a>
+    </div>
+
+    <table class="table">
+        <thead class="table-primary">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
-            <th>Direccion</th>
+            <th>Dirección</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -115,13 +45,21 @@
             <td th:text="${cliente.email}"></td>
             <td th:text="${cliente.telefono}"></td>
             <td th:text="${cliente.direccion}"></td>
-            <td>
-                <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn">Editar</a>
+            <td class="text-nowrap align-middle">
+                <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-primary btn-sm me-1">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente?');">
+                    <i class="fas fa-trash"></i> Eliminar
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
+<!-- Bootstrap JS -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class VehiculoControlador {
     public String editarVehiculo(@PathVariable Long id, Model model) {
         Vehiculo vehiculo = vehiculoRepository.findById(id).orElse(null);
         model.addAttribute("vehiculo", vehiculo);
-        return "editarVehiculo";
+        return "editar_vehiculo";
     }
 
     @GetMapping("/nuevo")

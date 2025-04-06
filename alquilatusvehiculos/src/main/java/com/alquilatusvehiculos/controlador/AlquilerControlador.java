@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -65,40 +66,40 @@ public class AlquilerControlador {
     public String mostrarFormularioEditarAlquiler(@PathVariable("id") Long id, Model model) {
         Alquiler alquiler = alquilerRepositorio.findById(id).orElse(null);
         if (alquiler != null) {
-            List<Cliente> clientes = clienteRepositorio.findAll();
-            List<Vehiculo> vehiculos = vehiculoRepositorio.findAll();
             model.addAttribute("alquiler", alquiler);
-            model.addAttribute("clientes", clientes);
-            model.addAttribute("vehiculos", vehiculos);
-            return "formulario_alquiler";  // Nombre del archivo HTML para el formulario
+            model.addAttribute("clientes", clienteRepositorio.findAll());
+            model.addAttribute("vehiculos", vehiculoRepositorio.findAll());
+            return "editar_alquiler";
         }
         return "redirect:/alquileres";
     }
 
     // Actualizar un alquiler existente
     @PostMapping("/alquileres/editar")
-    public String actualizarAlquiler(Alquiler alquiler) {
-        // Calcular el total del alquiler
+    public String actualizarAlquiler(@ModelAttribute Alquiler alquiler) {
         double precioTotal = calcularPrecioTotal(alquiler.getFechaInicio(), alquiler.getFechaFin(), alquiler.getVehiculo());
         alquiler.setPrecioTotal(precioTotal);
-
-        // Actualizar el alquiler con el total recalculado
         alquilerRepositorio.save(alquiler);
-        return "redirect:/alquileres";  // Redirige a la lista de alquileres
+        return "redirect:/alquileres";
     }
 
     // Método para calcular el precio total del alquiler con validaciones
     private double calcularPrecioTotal(LocalDate fechaInicio, LocalDate fechaFin, Vehiculo vehiculo) {
         if (fechaInicio == null || fechaFin == null || fechaInicio.isAfter(fechaFin)) {
-            throw new IllegalArgumentException("Las fechas son inválidas. La fecha de inicio no puede ser posterior a la fecha de fin.");
+            throw new IllegalArgumentException("Fechas inválidas");
         }
-
         long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
         if (dias <= 0) {
-            throw new IllegalArgumentException("El alquiler debe durar al menos un día.");
+            throw new IllegalArgumentException("Duración mínima: un día");
         }
-
         return dias * vehiculo.getPrecioPorDia();
     }
+
+    @GetMapping("/alquileres/eliminar/{id}")
+    public String eliminarAlquiler(@PathVariable("id") Long id) {
+        alquilerRepositorio.deleteById(id);
+        return "redirect:/alquileres";
+    }
+
 
 }

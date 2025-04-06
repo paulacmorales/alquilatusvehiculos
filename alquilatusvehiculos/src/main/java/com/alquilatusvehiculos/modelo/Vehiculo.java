@@ -26,5 +26,13 @@ public class Vehiculo {
         return precioPorDia;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     // Otros métodos y setters generados por Lombok (si estás usando Lombok)
 }
