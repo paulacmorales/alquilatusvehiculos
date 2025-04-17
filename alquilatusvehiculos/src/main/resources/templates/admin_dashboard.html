@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Zona Administrador</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+        background: linear-gradient(135deg, #0d6efd, #6610f2);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .card {
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn + .btn {
+        margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="card text-center text-dark bg-light w-100" style="max-width: 450px;">
+  <h2 class="mb-4">Bienvenido, Administrador</h2>
+  <p class="text-muted">Gestión completa del sistema</p>
+
+  <a th:href="@{/clientes}" class="btn btn-primary btn-lg w-100">
+    <i class="fas fa-users me-2"></i> Gestionar Clientes
+  </a>
+
+  <a th:href="@{/vehiculos}" class="btn btn-primary btn-lg w-100">
+    <i class="fas fa-car me-2"></i> Gestionar Vehículos
+  </a>
+
+  <a th:href="@{/alquileres}" class="btn btn-primary btn-lg w-100">
+    <i class="fas fa-clipboard-list me-2"></i> Gestionar Alquileres
+  </a>
+
+  <form th:action="@{/logout}" method="post" class="mt-4">
+    <button type="submit" class="btn btn-outline-danger w-100">
+      <i class="fas fa-sign-out-alt me-2"></i> Cerrar sesión
+    </button>
+  </form>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

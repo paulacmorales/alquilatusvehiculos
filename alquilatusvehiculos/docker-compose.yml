@@ -3,21 +3,25 @@ version: '3.8'
 services:
   db:
     image: mariadb:10.11
-    container_name: alquila_db
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: alquiler_vehiculos
     ports:
-      - "3307:3306" #mi puerto 3306 está en uso he usado otro, poner 3306 en ambos casos para ponerlo por defecto
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
-    container_name: alquila_app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
