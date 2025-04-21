@@ -1,0 +1,45 @@
+@startuml
+
+entity Cliente {
+    +id: Long <<PK>>
+    +nombre: String
+    +email: String
+    +telefono: String
+    +direccion: String
+}
+
+entity Usuario {
+    +id: Long <<PK>>
+    +nombre: String
+    +email: String <<UNIQUE, NOT NULL>>
+    +password: String <<NOT NULL>>
+    +rol: String
+    +estado: Boolean
+    +created: LocalDateTime
+    +updated: LocalDateTime
+}
+
+entity Vehiculo {
+    +id: Long <<PK>>
+    +marca: String
+    +modelo: String
+    +matricula: String
+    +precioPorDia: Double
+    +anio: int
+    +disponible: boolean
+}
+
+entity Alquiler {
+    +id: Long <<PK>>
+    +fechaInicio: LocalDate
+    +fechaFin: LocalDate
+    +precioTotal: Double
+    --
+    +vehiculo_id: Long <<FK>>
+    +cliente_id: Long <<FK>>
+}
+
+Cliente --o{ Alquiler : alquila >
+Vehiculo --o{ Alquiler : contiene >
+
+@enduml
