@@ -1,4 +1,4 @@
-package com.alquilatusvehiculos.Repositorios;
+package com.alquilatusvehiculos.repositorio;
 
 
 import com.alquilatusvehiculos.modelo.Cliente;

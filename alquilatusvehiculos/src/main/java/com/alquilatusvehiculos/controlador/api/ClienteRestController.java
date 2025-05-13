@@ -1,26 +1,25 @@
 package com.alquilatusvehiculos.controlador.api;
 
 import com.alquilatusvehiculos.modelo.Cliente;
-import com.alquilatusvehiculos.Repositorios.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alquilatusvehiculos.repositorio.ClienteRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@RequiredArgsConstructor
 public class ClienteRestController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<Cliente> getAllClientes() {
-        return clienteRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Cliente getClienteById(@PathVariable Long id) {
-        return clienteRepository.findById(id).orElse(null);
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public ResponseEntity<List<Cliente>> listarClientes() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        return ResponseEntity.ok(clientes);
     }
 }

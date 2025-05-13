@@ -1,7 +1,7 @@
 package com.alquilatusvehiculos.controlador.api;
 
 import com.alquilatusvehiculos.modelo.Alquiler;
-import com.alquilatusvehiculos.Repositorios.AlquilerRepository;
+import com.alquilatusvehiculos.repositorio.AlquilerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

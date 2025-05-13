@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class usuario {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -104,8 +104,8 @@ public class usuario {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof usuario)) return false;
-        usuario usuario = (usuario) o;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
         return Objects.equals(id, usuario.id);
     }
 
@@ -116,7 +116,7 @@ public class usuario {
 
     @Override
     public String toString() {
-        return "usuario{" +
+        return "Usuario{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
@@ -127,4 +127,5 @@ public class usuario {
                 ", updated=" + updated +
                 '}';
     }
+
 }

@@ -1,6 +1,6 @@
 package com.alquilatusvehiculos.controlador;
 
-import com.alquilatusvehiculos.modelo.usuario;
+import com.alquilatusvehiculos.modelo.Usuario;
 import com.alquilatusvehiculos.servicios.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ public class UsuarioControlador {
 
     @GetMapping("/register")
     public String mostrarFormularioRegistro(Model model) {
-        model.addAttribute("usuario", new usuario());
+        model.addAttribute("usuario", new Usuario());
         return "registro";
     }
 
@@ -37,7 +37,7 @@ public class UsuarioControlador {
 
 
     @PostMapping("/register")
-    public String procesarRegistro(@ModelAttribute("usuario") usuario usuario,
+    public String procesarRegistro(@ModelAttribute("usuario") Usuario usuario,
                                    @RequestParam(name = "codigoRol", required = false) String codigoRol,
                                    Model model) {
         if (usuarioService.emailExiste(usuario.getEmail())) {

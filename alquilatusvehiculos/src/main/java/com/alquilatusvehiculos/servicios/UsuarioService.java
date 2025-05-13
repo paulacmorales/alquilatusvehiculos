@@ -1,9 +1,9 @@
 package com.alquilatusvehiculos.servicios;
 
-import com.alquilatusvehiculos.Repositorios.ClienteRepository;
+import com.alquilatusvehiculos.repositorio.ClienteRepository;
 import com.alquilatusvehiculos.modelo.Cliente;
-import com.alquilatusvehiculos.modelo.usuario;
-import com.alquilatusvehiculos.Repositorios.UsuarioRepository;
+import com.alquilatusvehiculos.modelo.Usuario;
+import com.alquilatusvehiculos.repositorio.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,9 @@ public class UsuarioService {
         return usuarioRepository.findByEmail(email).isPresent();
     }
 
-    public usuario registrar(usuario nuevoUsuario) {
+    public Usuario registrar(Usuario nuevoUsuario) {
         nuevoUsuario.setPassword(passwordEncoder.encode(nuevoUsuario.getPassword()));
-        usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
+        Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
 
         // Usamos el email como username en Cliente
         if (clienteRepository.findByUsername(usuarioGuardado.getEmail()) == null) {
