@@ -78,7 +78,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Swagger Dependencies -->
+		<!-- Dependencias Swagger -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -91,6 +91,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -22,4 +22,12 @@ public class ClienteRestController {
         List<Cliente> clientes = clienteRepository.findAll();
         return ResponseEntity.ok(clientes);
     }
+
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
+        Cliente nuevo = clienteRepository.save(cliente);
+        return ResponseEntity.ok(nuevo);
+    }
+
 }

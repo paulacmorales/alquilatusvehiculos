@@ -18,4 +18,6 @@ public class AlquilerRestController {
     public List<Alquiler> getAllAlquileres() {
         return alquilerRepository.findAll();
     }
+
+
 }
